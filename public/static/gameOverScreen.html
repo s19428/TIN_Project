@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+
+</style>
+</head>
+<body onload="getScore()"">
+
+<script>
+function loadGame() {
+    window.location.href = "http://localhost:3000";
+}
+function showServerScore(json) {
+  document.getElementById("score").innerHTML = 'serverScore: ' + json[0].serverScore;
+}
+function getScore() {
+    fetch('http://localhost:3000/getScore',
+    {
+        method:'GET',
+        headers:{ 'Content-Type':'application/json' },
+    }).then(response=>response.json()).then(json=>showServerScore(json));
+}
+</script>
+
+<p5>Game over</p5>
+<form>
+  <input type="button" value="Play again" onclick="loadGame()"/>
+</form>
+
+<div id="score"></div>
+
+</body>
+</html>
